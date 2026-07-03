@@ -1,7 +1,7 @@
 """
 Brand kit + rendering helpers for IBONNE TORO carousels.
-Colors and rules extracted from files/1_DESIGN_SYSTEM_IBONNE_TORO.md and the
-reference pieces in /Referencias.
+Colors and rules extracted from material_apoyo/files/1_DESIGN_SYSTEM_IBONNE_TORO.md
+and the reference pieces in material_apoyo/Referencias/.
 """
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import numpy as np

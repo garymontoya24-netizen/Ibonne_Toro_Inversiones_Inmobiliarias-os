@@ -5,7 +5,7 @@ import os
 import brandkit as bk
 from slides import hero, story
 
-DEL = os.path.join(bk.ROOT, "CARRUSELES_FINALES_CON_AJUSTES")
+DEL = os.path.join(bk.ROOT, "carruseles", "CARRUSELES_FINALES_CON_AJUSTES")
 CUR = os.path.join(DEL, "FOTOS_CURADAS")
 OUT = os.path.join(DEL, "carrusel_2_ajustado")
 os.makedirs(OUT, exist_ok=True)
@@ -16,10 +16,10 @@ def P(n): return os.path.join(CUR, "inmuebles", n + ".jpg")
 
 SLIDES = [
     ("slide_01.png", lambda: hero(
-        P("c2_sala_panoramica"), "SECTORES PREMIUM",
+        P("c2_portada_atardecer"), "SECTORES PREMIUM",
         "La Florida · San Marcel · Bella Suiza · Expoferias",
-        "Donde Manizales vive mejor",
-        "Y donde IBONNE TORO te abre la puerta.", focus_y=0.42)),
+        "Baja Suiza · Milán · El Cable",
+        "Donde Manizales vive mejor — y donde IBONNE TORO te abre la puerta.", focus_y=0.45)),
     ("slide_02.png", lambda: story(
         P("c2_aerea_campestre"), "La Florida · Villamaría",
         "Vida campestre con vista al Nevado, a minutos de la ciudad.",
@@ -29,9 +29,9 @@ SLIDES = [
         "Estrato 6 en el oriente: conjuntos con amenidades y plusvalía sostenida.",
         fact="Apto 89 m², 3 hab — $640M · listado real IBONNE TORO", focus_y=0.50)),
     ("slide_04.png", lambda: story(
-        P("c2_apto_vista"), "Expoferias",
+        P("c2_vista_ciudad_panoramica"), "Expoferias",
         "El corazón universitario y clínico: la renta más sólida de Manizales.",
-        fact="Estrato 6 · demanda de arriendo todo el año", focus_y=0.45)),
+        fact="Estrato 6 · demanda de arriendo todo el año", focus_y=0.50)),
     ("slide_05.png", lambda: story(
         P("c2_sala_familiar"), "Bella Suiza",
         "Tranquilidad, topografía plana y conjuntos familiares consolidados.",
@@ -51,8 +51,8 @@ SLIDES = [
         P("c2_espacios_luz"), "Diseño y luz",
         "Espacios pensados para vivir bien y para invertir mejor.", focus_y=0.50)),
     ("slide_10.png", lambda: story(
-        P("c2_sala_verde"), "El entorno que suma",
-        "Vistas verdes, naturaleza y ciudad: el lujo silencioso de Manizales.", focus_y=0.45)),
+        P("c2_balcon_terraza_verde"), "El entorno que suma",
+        "Vistas verdes, naturaleza y ciudad: el lujo silencioso de Manizales.", focus_y=0.42)),
     ("slide_11.png", lambda: hero(
         S("ibonne_cta_sentada"), "¿CUÁL ES TU SECTOR?", "Tu lugar en Manizales te espera",
         "Escríbenos y te asesoramos sin costo",

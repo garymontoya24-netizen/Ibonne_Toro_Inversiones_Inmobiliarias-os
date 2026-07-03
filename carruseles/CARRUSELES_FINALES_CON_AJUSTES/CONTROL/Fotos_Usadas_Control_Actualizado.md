@@ -2,7 +2,18 @@
 
 Sustituciones aplicadas sobre los carruseles mejorados, según feedback de Ibonne. **Sin repeticiones entre C1 y C2.** Criterio: solo fotos nítidas, de alta resolución nativa y premium; retratos con Ibonne SENTADA donde se pidió.
 
-## Cambios realizados
+## Ronda 4 — variedad + portada (Carrusel 2, últimos)
+- **C2 S1 (portada):** el copy ahora incluye los 3 sectores pedidos como subtítulo: **"Baja Suiza · Milán · El Cable"** (además de los 4 del título). Foto de portada (atardecer) sin cambios.
+- **C2 S4:** reemplazada por **G023** (`/Fotos/`, 4160px) — panorámica **urbana** de Manizales (desde arriba).
+- **C2 S10:** reemplazada por **G009** (`/Fotos/`, 4160px) — **balcón/terraza** con colinas verdes.
+- S4 y S10 ahora son **visualizaciones claramente distintas** (urbana vs. verde). Variedad de todo el carrusel revisada.
+
+## Ronda 3 — ajustes de Carrusel 2
+- **C2 S1 (portada):** ahora usa la **foto específica** pedida (`FOTOS ESPECIFICAS/Foto 1.jpeg`, atardecer de Manizales). Copy y diseño intactos.
+- **C2 S4:** F172 se parecía mucho a la de S10 (ambas apto con ventanal verde) → reemplazada por **F166** (panorámica de barrio residencial + montañas), claramente distinta de S10.
+- **C2 S10:** sin cambios (F202).
+
+## Cambios realizados (ronda 2)
 
 | Carrusel | Slide | Nombre curado | Origen | Archivo original | Por qué |
 |---|---|---|---|---|---|
@@ -38,12 +49,12 @@ Sustituciones aplicadas sobre los carruseles mejorados, según feedback de Ibonn
 | C1 | S7 | c1_sala_vista_montana.jpg | F161 | WhatsApp Image 2026-06-25 at 10.53.38 (1).jpeg | Sala con ventanal a montaña — espacios |
 | C1 | S8 **(CAMBIO)** | ibonne_eje_cafetero_sentada.jpg | SRG00949 | SRG00949.jpg | SENTADA en mesa con mural Eje Cafetero (reemplaza de pie) — respaldo experto |
 | C1 | S9 | ibonne_asesoria_tablet.jpg | SRG01210 | SRG01210.jpg | Sentada con tablet — decisiones seguras |
-| C2 | S1 | c2_sala_panoramica.jpg | F166 | WhatsApp Image 2026-06-25 at 10.53.38 (14).jpeg | Sala panorámica ciudad — portada |
-| C2 | S10 | c2_sala_verde.jpg | F202 | WhatsApp Image 2026-06-25 at 10.53.38.jpeg | Sala ventanal verde — entorno que suma |
+| C2 | S1 **(CAMBIO)** | c2_portada_atardecer.jpg | específica | FOTOS ESPECIFICAS/Foto 1.jpeg | Atardecer de Manizales (foto específica pedida) — portada |
+| C2 | S10 **(CAMBIO)** | c2_balcon_terraza_verde.jpg | G009 (/Fotos/) | WhatsApp Image 2026-07-03 at 10.38.00 (3).jpeg | Balcón/terraza con colinas verdes, 4160px — entorno (distinta de S4) |
 | C2 | S11 **(CAMBIO)** | ibonne_cta_sentada.jpg | SRG01045 | SRG01045.jpg | SENTADA sonriente, cercana (reemplaza de pie) — CTA |
 | C2 | S2 | c2_aerea_campestre.jpg | F121 | WhatsApp Image 2026-06-25 at 10.53.34 (6).jpeg | Aérea verde + montañas — La Florida |
 | C2 | S3 **(CAMBIO)** | c2_cocina_diseno.jpg | F106 | WhatsApp Image 2026-06-24 at 21.43.44 (5).jpeg | Cocina abovedada de lujo 4032px (reemplaza F113 blanda) — San Marcel |
-| C2 | S4 | c2_apto_vista.jpg | F172 | WhatsApp Image 2026-06-25 at 10.53.38 (2).jpeg | Apto vista verde — Expoferias |
+| C2 | S4 **(CAMBIO)** | c2_vista_ciudad_panoramica.jpg | G023 (/Fotos/) | WhatsApp Image 2026-07-03 at 10.47.52.jpeg | Panorámica URBANA de Manizales, 4160px — Expoferias (distinta de S10) |
 | C2 | S5 **(CAMBIO)** | c2_sala_familiar.jpg | F201 | WhatsApp Image 2026-06-25 at 10.53.38 (9).jpeg | Comedor cálido amoblado, nítido (reemplaza F141 800x600 borrosa) — Bella Suiza |
 | C2 | S6 | c2_terraza_panoramica.jpg | F162 | WhatsApp Image 2026-06-25 at 10.53.38 (10).jpeg | Terraza panorámica — portafolio |
 | C2 | S7 **(CAMBIO)** | ibonne_equipo_traje_azul.jpg | SRG01012 | SRG01012.jpg | SENTADA con profesional (traje azul) en reunión (reemplaza de pie) — equipo que respalda |

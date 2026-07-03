@@ -4,9 +4,9 @@ CARRUSELES_FINALES_CON_AJUSTES/FOTOS_CURADAS/ with friendly names."""
 import os, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRCP = os.path.join(ROOT, "Fotos inmuebles")
-SRCS = os.path.join(ROOT, "FOTOS IBONNE", "Ibonne Toro")
-DEL  = os.path.join(ROOT, "CARRUSELES_FINALES_CON_AJUSTES")
+SRCP = os.path.join(ROOT, "fotos_fuente", "Fotos inmuebles")
+SRCS = os.path.join(ROOT, "fotos_fuente", "FOTOS IBONNE", "Ibonne Toro")
+DEL  = os.path.join(ROOT, "carruseles", "CARRUSELES_FINALES_CON_AJUSTES")
 CURP = os.path.join(DEL, "FOTOS_CURADAS", "inmuebles")
 CURS = os.path.join(DEL, "FOTOS_CURADAS", "estudio_ibonne")
 

@@ -6,7 +6,7 @@ from PIL import ImageDraw
 import brandkit as bk
 from slides import hero, story
 
-DEL = os.path.join(bk.ROOT, "CARRUSELES_FINALES_CON_AJUSTES")
+DEL = os.path.join(bk.ROOT, "carruseles", "CARRUSELES_FINALES_CON_AJUSTES")
 CUR = os.path.join(DEL, "FOTOS_CURADAS")
 OUT = os.path.join(DEL, "carrusel_1_ajustado")
 os.makedirs(OUT, exist_ok=True)

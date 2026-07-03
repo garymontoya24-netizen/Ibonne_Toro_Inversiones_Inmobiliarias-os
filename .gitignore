@@ -2,3 +2,8 @@
 __pycache__/
 *.pyc
 .claude/
+
+# scratch de revisión (hojas de contacto regenerables)
+build/review/
+build/review2/
+build/review3/
