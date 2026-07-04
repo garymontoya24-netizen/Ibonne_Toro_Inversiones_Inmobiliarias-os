@@ -3,13 +3,13 @@ from PIL import ImageDraw
 import brandkit as bk
 
 
-def hero(path, chip, title, sub, support, focus_y=0.5, focus_x=0.5):
+def hero(path, chip, title, sub, support, focus_y=0.5, focus_x=0.5, title_size=62):
     """Cover / CTA slide: photo + dark gradient, gold chip, gold title, white
     sub + support line, footer lockup. (Same recipe as the validated carousel.)"""
     base = bk.cover(path, focus_y=focus_y, focus_x=focus_x)
     base.alpha_composite(bk.vgradient(bk.AZUL, [(0.0, 40), (0.34, 0), (0.56, 120), (1.0, 252)]))
     d = ImageDraw.Draw(base)
-    f_title = bk.F_bold(62)
+    f_title = bk.F_bold(title_size)
     f_sub   = bk.F_sub(34)
     f_sup   = bk.F_reg(24)
     title_lines = bk.wrap(d, title, f_title, bk.W - bk.MX * 2)

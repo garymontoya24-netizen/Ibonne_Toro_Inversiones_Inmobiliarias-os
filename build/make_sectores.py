@@ -17,9 +17,9 @@ def P(n): return os.path.join(CUR, "inmuebles", n + ".jpg")
 SLIDES = [
     ("slide_01.png", lambda: hero(
         P("c2_portada_atardecer"), "SECTORES PREMIUM",
-        "La Florida · San Marcel · Bella Suiza · Expoferias",
-        "Baja Suiza · Milán · El Cable",
-        "Donde Manizales vive mejor — y donde IBONNE TORO te abre la puerta.", focus_y=0.45)),
+        "Expoferias · Milán · Baja Suiza · El Cable · La Florida · San Marcel",
+        "Donde Manizales vive mejor",
+        "y donde IBONNE TORO te abre la puerta.", focus_y=0.45, title_size=48)),
     ("slide_02.png", lambda: story(
         P("c2_aerea_campestre"), "La Florida · Villamaría",
         "Vida campestre con vista al Nevado, a minutos de la ciudad.",

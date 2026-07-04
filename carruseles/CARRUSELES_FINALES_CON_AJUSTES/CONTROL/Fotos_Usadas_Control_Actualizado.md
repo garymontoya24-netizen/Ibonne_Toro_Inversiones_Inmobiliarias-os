@@ -2,7 +2,13 @@
 
 Sustituciones aplicadas sobre los carruseles mejorados, según feedback de Ibonne. **Sin repeticiones entre C1 y C2.** Criterio: solo fotos nítidas, de alta resolución nativa y premium; retratos con Ibonne SENTADA donde se pidió.
 
-## Ronda 4 — variedad + portada (Carrusel 2, últimos)
+## Ronda 5 — corrección de portada (Carrusel 2 · Slide 1)
+- **Corrección de nombre:** es **"Baja Suiza"**, NO "Bella Suiza" (la portada tenía las dos grafías mezcladas).
+- **Milán y El Cable** ascienden al **título dorado principal** (antes en el subtítulo pequeño) → tan destacados como los demás sectores.
+- Título nuevo: **"Expoferias · Milán · Baja Suiza · El Cable · La Florida · San Marcel"** (todos en un bloque dorado). Foto de portada (atardecer) sin cambios.
+- ⚠️ Pendiente: el **Slide 5** aún dice "BELLA SUIZA" (mismo posible error de nombre). Confirmar con el cliente si debe ser "Baja Suiza".
+
+## Ronda 4 — variedad + portada (Carrusel 2)
 - **C2 S1 (portada):** el copy ahora incluye los 3 sectores pedidos como subtítulo: **"Baja Suiza · Milán · El Cable"** (además de los 4 del título). Foto de portada (atardecer) sin cambios.
 - **C2 S4:** reemplazada por **G023** (`/Fotos/`, 4160px) — panorámica **urbana** de Manizales (desde arriba).
 - **C2 S10:** reemplazada por **G009** (`/Fotos/`, 4160px) — **balcón/terraza** con colinas verdes.
