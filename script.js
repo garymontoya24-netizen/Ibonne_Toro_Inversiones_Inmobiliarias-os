@@ -99,6 +99,149 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // ---- Contadores animados (banda de datos) ----
+  // Cada <span data-count="10" data-decimals="0" data-prefix="+" data-suffix="%">
+  // se anima de 0 al valor final cuando entra en pantalla.
+  var counters = document.querySelectorAll('[data-count]');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function formatCount(value, decimals) {
+    return value.toLocaleString('es-CO', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+  function animateCounter(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (isNaN(target)) return;
+    if (reduceMotion) { el.textContent = prefix + formatCount(target, decimals) + suffix; return; }
+    var duration = 1400, start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      el.textContent = prefix + formatCount(target * eased, decimals) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + formatCount(target, decimals) + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  if (counters.length && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { animateCounter(entry.target); cio.unobserve(entry.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { cio.observe(el); });
+  } else {
+    counters.forEach(function (el) {
+      el.textContent = (el.getAttribute('data-prefix') || '')
+        + formatCount(parseFloat(el.getAttribute('data-count')), parseInt(el.getAttribute('data-decimals') || '0', 10))
+        + (el.getAttribute('data-suffix') || '');
+    });
+  }
+
+  // ---- Explorador de sectores (mapa + pestañas → panel) ----
+  var sectorTabs  = document.querySelectorAll('.sector-tab');
+  var sectorPins  = document.querySelectorAll('.map-pin');
+  var sectorViews = document.querySelectorAll('.sector-view');
+
+  function selectSector(i) {
+    sectorTabs.forEach(function (t) {
+      var on = parseInt(t.getAttribute('data-sector'), 10) === i;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    sectorPins.forEach(function (p) {
+      p.classList.toggle('is-active', parseInt(p.getAttribute('data-sector'), 10) === i);
+    });
+    sectorViews.forEach(function (v) {
+      v.classList.toggle('is-active', parseInt(v.getAttribute('data-index'), 10) === i);
+    });
+  }
+  if (sectorTabs.length && sectorViews.length) {
+    sectorTabs.forEach(function (t) {
+      t.addEventListener('click', function () { selectSector(parseInt(t.getAttribute('data-sector'), 10)); });
+    });
+    sectorPins.forEach(function (p) {
+      p.addEventListener('click', function () {
+        var i = parseInt(p.getAttribute('data-sector'), 10);
+        selectSector(i);
+        // llevar el foco a la pestaña equivalente para lectores de pantalla
+        var tab = document.querySelector('.sector-tab[data-sector="' + i + '"]');
+        if (tab) tab.focus();
+      });
+    });
+    // Navegación por flechas entre pestañas (patrón tablist)
+    var tabList = document.querySelector('.sector-tabs');
+    if (tabList) {
+      tabList.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var current = document.querySelector('.sector-tab.is-active');
+        var i = current ? parseInt(current.getAttribute('data-sector'), 10) : 0;
+        var n = sectorTabs.length;
+        i = e.key === 'ArrowRight' ? (i + 1) % n : (i - 1 + n) % n;
+        selectSector(i);
+        var next = document.querySelector('.sector-tab[data-sector="' + i + '"]');
+        if (next) next.focus();
+        e.preventDefault();
+      });
+    }
+  }
+
+  // ---- Simulador de valorización ----
+  var simMonto = document.getElementById('simMonto');
+  var simYears = document.getElementById('simYears');
+  var simRate  = document.getElementById('simRate');
+
+  function money(n) { return '$' + Math.round(n).toLocaleString('es-CO'); }
+  function setRangeFill(el) {
+    if (!el) return;
+    var min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+    var pct = ((val - min) / (max - min)) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+  function calcSim() {
+    if (!simMonto || !simYears || !simRate) return;
+    var monto = parseFloat(simMonto.value);
+    var years = parseFloat(simYears.value);
+    var rate  = parseFloat(simRate.value);
+    var valor = monto * Math.pow(1 + rate / 100, years);
+
+    var montoOut = document.getElementById('simMontoOut');
+    var yearsOut = document.getElementById('simYearsOut');
+    var rateOut  = document.getElementById('simRateOut');
+    var valorEl  = document.getElementById('simValor');
+    var gainEl   = document.getElementById('simGain');
+
+    if (montoOut) montoOut.textContent = money(monto);
+    if (yearsOut) yearsOut.textContent = years + (years === 1 ? ' año' : ' años');
+    if (rateOut)  rateOut.textContent  = rate.toLocaleString('es-CO') + '% / año';
+    if (valorEl)  valorEl.textContent  = money(valor);
+    if (gainEl)   gainEl.textContent   = '+' + money(valor - monto);
+
+    [simMonto, simYears, simRate].forEach(setRangeFill);
+
+    // actualizar el enlace de WhatsApp con el escenario del cliente
+    var simCta = document.getElementById('simCta');
+    if (simCta) {
+      var msg = 'Hola Ibonne, usé el simulador: si invierto ' + money(monto)
+        + ' con una valorización del ' + rate.toLocaleString('es-CO') + '% podría llegar a ' + money(valor)
+        + ' en ' + years + (years === 1 ? ' año' : ' años') + '. Me gustaría ver opciones reales.';
+      simCta.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+  }
+  if (simMonto && simYears && simRate) {
+    [simMonto, simYears, simRate].forEach(function (el) {
+      el.addEventListener('input', calcSim);
+    });
+    calcSim();
+  }
+
   // ---- Formulario de contacto → WhatsApp ----
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
