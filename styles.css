@@ -139,10 +139,13 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 .nav a:not(.nav-cta):hover::after{width:100%}
 .nav-cta{
   background:linear-gradient(135deg,var(--dorado-soft),var(--dorado-deep));
-  color:var(--azul)!important;padding:13px 30px;border-radius:999px;font-weight:700;
-  margin-left:8px;box-shadow:0 6px 18px rgba(212,175,55,.32);
+  color:var(--azul)!important;padding:15px 36px;border-radius:999px;font-weight:700;
+  margin-left:10px;box-shadow:0 6px 18px rgba(212,175,55,.32);
   transition:transform .3s var(--ease),box-shadow .3s;
 }
+/* Especificidad: .nav a (0,1,1) le ganaba a .nav-cta y borraba su padding.
+   Esta regla (0,2,1) lo restaura para que el botón "Hablemos" respire. */
+.nav a.nav-cta{padding:14px 34px}
 .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(212,175,55,.45)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
 .nav-toggle span{width:26px;height:2.5px;background:#fff;border-radius:2px;transition:.3s var(--ease)}
@@ -162,7 +165,7 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
     linear-gradient(90deg,rgba(44,62,80,.92) 0%,rgba(44,62,80,.66) 42%,rgba(44,62,80,.28) 75%,rgba(44,62,80,.45) 100%),
     linear-gradient(180deg,rgba(44,62,80,.55) 0%,rgba(44,62,80,0) 28%,rgba(44,62,80,.55) 100%);
 }
-.hero-content{position:relative;z-index:2;padding-top:90px;padding-bottom:60px;max-width:760px}
+.hero-content{position:relative;z-index:2;padding-top:132px;padding-bottom:60px;max-width:760px}
 .hero-title{
   font-size:clamp(2.6rem,6.4vw,4.7rem);font-weight:800;color:#fff;letter-spacing:-.02em;
   text-shadow:0 2px 30px rgba(0,0,0,.35);margin-bottom:24px;
@@ -436,7 +439,10 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 @media(max-width:860px){
   .value-grid,.ibonne-grid,.cta-grid{grid-template-columns:1fr;gap:40px}
   .ibonne-photo{max-width:440px;margin:0 auto}
-  .hero-overlay{background:linear-gradient(180deg,rgba(44,62,80,.55),rgba(44,62,80,.78))}
+  .hero-overlay{background:linear-gradient(180deg,rgba(44,62,80,.62),rgba(44,62,80,.78))}
+  /* En móvil el hero alinea arriba: el contenido nunca choca con el header */
+  .hero{align-items:flex-start}
+  .hero-content{padding-top:120px}
 }
 @media(max-width:620px){
   body{font-size:16px}
@@ -597,9 +603,9 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
   font-weight:700;font-size:.92rem;padding:7px 15px;border-radius:999px;letter-spacing:-.01em;
   box-shadow:0 6px 16px rgba(0,0,0,.28);
 }
-.portal-chip.mc{background:#E4002B}
-.portal-chip.fr{background:#2FA84F}
-.portal-chip.pr{background:#0E9F9F}
+.portal-chip.mc{background:#FF7A00}
+.portal-chip.fr{background:#0047AB}
+.portal-chip.pr{background:#00A24A}
 .portal-body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
 .portal-body p{font-size:.98rem;color:var(--ink-soft);margin-bottom:20px;flex:1}
 .portal-cta{

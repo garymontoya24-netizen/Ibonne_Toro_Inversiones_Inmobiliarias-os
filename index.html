@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lexend+Deca:wght@400;500;600&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -56,7 +56,7 @@
   <div class="container hero-content reveal">
     <p class="eyebrow eyebrow-gold">Asesora inmobiliaria · Manizales y Eje Cafetero</p>
     <h1 class="hero-title">Invierte en Manizales <span class="gold">sin equivocarte.</span></h1>
-    <p class="hero-sub">Manizales se valoriza como pocas ciudades del país y aún cuesta menos que Bogotá o Medellín. Te acompaño a elegir bien —con datos y criterio, no con corazonadas.</p>
+    <p class="hero-sub">Manizales se valoriza rápido y aún cuesta menos que Bogotá o Medellín. Te acompaño a elegir bien —con datos y criterio, no con corazonadas.</p>
     <div class="hero-actions">
       <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20quiero%20hablar%20sobre%20invertir%20en%20Manizales." class="btn btn-gold" target="_blank" rel="noopener">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.911zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
@@ -77,8 +77,8 @@
   <div class="container">
     <div class="section-head center reveal">
       <p class="eyebrow">Por qué Manizales</p>
-      <h2 class="section-title">Se valoriza como pocas. Cuesta como ninguna capital grande.</h2>
-      <p class="section-lead">Manizales cerró 2025 con una de las valorizaciones más altas del país. Y aun así, su metro cuadrado sigue siendo el más accesible frente a Bogotá, Medellín y Pereira. Familias que llegan de las grandes capitales, turismo en alza y una demanda de arriendo que casi no conoce vacancia. Por eso el momento es ahora.</p>
+      <h2 class="section-title">Se valoriza rápido y todavía cuesta menos que Bogotá o Medellín.</h2>
+      <p class="section-lead">En 2025 fue una de las ciudades que más se valorizó en Colombia, y su metro cuadrado sigue costando menos que en Bogotá, Medellín o Pereira. Llegan familias de las grandes capitales, el turismo crece y el arriendo casi no baja. Buen momento para entrar.</p>
     </div>
     <div class="stats-grid">
       <article class="stat reveal">
@@ -168,18 +168,18 @@
     <div class="sector-explorer reveal">
       <!-- Mapa real de Manizales (se recentra según el sector) -->
       <div class="sector-map">
-        <iframe id="sectorMap" title="Mapa de Manizales y Villamaría" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.5400,5.0200,-75.4500,5.0900&layer=mapnik&marker=5.0662,-75.4917"></iframe>
-        <a class="map-open" href="https://www.openstreetmap.org/?mlat=5.0662&mlon=-75.4917#map=13/5.0662/-75.4917" target="_blank" rel="noopener">Ver Manizales en el mapa ↗</a>
+        <iframe id="sectorMap" title="Mapa del sector en Manizales" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.49360,5.04536,-75.46560,5.06536&layer=mapnik&marker=5.05536,-75.47960"></iframe>
+        <a class="map-open" id="mapOpen" href="https://www.openstreetmap.org/?mlat=5.05536&mlon=-75.47960#map=15/5.05536/-75.47960" target="_blank" rel="noopener">Ver en el mapa ↗</a>
       </div>
 
       <!-- Panel -->
       <div class="sector-panel">
         <div class="sector-tabs" role="tablist" aria-label="Sectores de Manizales">
-          <button class="sector-tab is-active" role="tab" data-sector="0" data-map="Baja Suiza, Manizales, Caldas" aria-selected="true">Baja Suiza</button>
-          <button class="sector-tab" role="tab" data-sector="1" data-map="Milán, Manizales, Caldas" aria-selected="false" tabindex="-1">Milán</button>
-          <button class="sector-tab" role="tab" data-sector="2" data-map="Torre del Cable, Manizales, Caldas" aria-selected="false" tabindex="-1">El Cable</button>
-          <button class="sector-tab" role="tab" data-sector="3" data-map="Expoferias, Manizales, Caldas" aria-selected="false" tabindex="-1">Expoferias</button>
-          <button class="sector-tab" role="tab" data-sector="4" data-map="La Florida, Villamaría, Caldas" aria-selected="false" tabindex="-1">La Florida</button>
+          <button class="sector-tab is-active" role="tab" data-sector="0" data-lat="5.05536" data-lon="-75.47960" aria-selected="true">Baja Suiza</button>
+          <button class="sector-tab" role="tab" data-sector="1" data-lat="5.04590" data-lon="-75.47986" aria-selected="false" tabindex="-1">Milán</button>
+          <button class="sector-tab" role="tab" data-sector="2" data-lat="5.05634" data-lon="-75.48642" aria-selected="false" tabindex="-1">El Cable</button>
+          <button class="sector-tab" role="tab" data-sector="3" data-lat="5.04142" data-lon="-75.47536" aria-selected="false" tabindex="-1">Expoferias</button>
+          <button class="sector-tab" role="tab" data-sector="4" data-lat="5.03385" data-lon="-75.48500" aria-selected="false" tabindex="-1">La Florida</button>
         </div>
         <div class="sector-stage">
           <div class="sector-view is-active" data-index="0" role="tabpanel">
@@ -245,7 +245,7 @@
     <div class="sim-intro reveal">
       <p class="eyebrow">Simulador de valorización</p>
       <h2 class="section-title">Observa cómo crece tu dinero</h2>
-      <p>Así funciona: elige cuánto invertirías y por cuántos años. Mira lo que pudo haber crecido tu inversión con la valorización real de Manizales.</p>
+      <p>¿Cuánto tendrías en unos años? Elige el monto y el tiempo, y míralo con la valorización real de Manizales. Números, no promesas.</p>
       <p class="sim-aviso">Es un estimado con datos reales, no una promesa. La valorización histórica no garantiza el futuro —cada inmueble y cada sector se mueven distinto.</p>
     </div>
     <div class="sim-card reveal">
@@ -498,6 +498,6 @@
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.911zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
 </a>
 
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>

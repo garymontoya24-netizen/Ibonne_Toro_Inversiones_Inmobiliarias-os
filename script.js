@@ -162,6 +162,25 @@
     sectorViews.forEach(function (v) {
       v.classList.toggle('is-active', parseInt(v.getAttribute('data-index'), 10) === i);
     });
+    // Recentrar el mapa real de Manizales en las coordenadas del sector
+    var activeTab = document.querySelector('.sector-tab[data-sector="' + i + '"]');
+    var mapFrame = document.getElementById('sectorMap');
+    if (activeTab && mapFrame) {
+      var lat = parseFloat(activeTab.getAttribute('data-lat'));
+      var lon = parseFloat(activeTab.getAttribute('data-lon'));
+      if (!isNaN(lat) && !isNaN(lon)) {
+        var dLat = 0.010, dLon = 0.014;
+        var bbox = (lon - dLon).toFixed(5) + ',' + (lat - dLat).toFixed(5) + ',' +
+                   (lon + dLon).toFixed(5) + ',' + (lat + dLat).toFixed(5);
+        mapFrame.src = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox +
+                       '&layer=mapnik&marker=' + lat.toFixed(5) + ',' + lon.toFixed(5);
+        var mapOpen = document.getElementById('mapOpen');
+        if (mapOpen) {
+          mapOpen.href = 'https://www.openstreetmap.org/?mlat=' + lat.toFixed(5) +
+                         '&mlon=' + lon.toFixed(5) + '#map=15/' + lat.toFixed(5) + '/' + lon.toFixed(5);
+        }
+      }
+    }
   }
   if (sectorTabs.length && sectorViews.length) {
     sectorTabs.forEach(function (t) {
