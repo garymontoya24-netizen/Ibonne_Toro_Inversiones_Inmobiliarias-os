@@ -440,9 +440,11 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
   .value-grid,.ibonne-grid,.cta-grid{grid-template-columns:1fr;gap:40px}
   .ibonne-photo{max-width:440px;margin:0 auto}
   .hero-overlay{background:linear-gradient(180deg,rgba(44,62,80,.62),rgba(44,62,80,.78))}
-  /* En móvil el hero alinea arriba: el contenido nunca choca con el header */
+  /* En móvil el hero alinea arriba: el contenido nunca choca con el header.
+     Nota: el div es "container hero-content"; en ≤620px la regla .container{padding:0 20px}
+     ponía padding-top:0 y anulaba el del hero. Por eso subimos la especificidad. */
   .hero{align-items:flex-start}
-  .hero-content{padding-top:120px}
+  .hero .hero-content{padding-top:118px}
 }
 @media(max-width:620px){
   body{font-size:16px}
