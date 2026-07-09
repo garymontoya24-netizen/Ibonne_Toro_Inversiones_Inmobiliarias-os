@@ -455,9 +455,10 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
   .section-head{margin-bottom:38px}
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-actions .btn{width:100%}
-  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
-  .g-wide{grid-column:span 2}
-  .g-tall{grid-row:span 1}
+  /* En móvil: 2 columnas uniformes, sin celdas anchas/altas que dejen huecos */
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;grid-auto-flow:dense}
+  .g-wide{grid-column:auto}
+  .g-tall{grid-row:auto}
   .cta-form{padding:28px 22px}
   .footer-inner{grid-template-columns:1fr;gap:32px;padding:54px 20px 36px}
   .ibonne-facts li{flex:1 1 100%}
