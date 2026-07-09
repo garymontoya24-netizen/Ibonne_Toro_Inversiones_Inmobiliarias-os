@@ -218,8 +218,11 @@
     var valorEl  = document.getElementById('simValor');
     var gainEl   = document.getElementById('simGain');
 
+    var yearsLabel = years + (years === 1 ? ' año' : ' años');
     if (montoOut) montoOut.textContent = money(monto);
-    if (yearsOut) yearsOut.textContent = years + (years === 1 ? ' año' : ' años');
+    if (yearsOut) yearsOut.textContent = yearsLabel;
+    var yearsBadge = document.getElementById('simYearsBadge');
+    if (yearsBadge) yearsBadge.textContent = yearsLabel;
     if (rateOut)  rateOut.textContent  = rate.toLocaleString('es-CO') + '% / año';
     if (valorEl)  valorEl.textContent  = money(valor);
     if (gainEl)   gainEl.textContent   = '+' + money(valor - monto);
