@@ -341,7 +341,8 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 .cta-contacts a{display:flex;align-items:center;gap:16px;color:#fff;transition:transform .3s var(--ease)}
 .cta-contacts a:hover{transform:translateX(5px)}
 .cta-contacts .ico{fill:var(--dorado);flex-shrink:0;
-  background:rgba(255,255,255,.07);padding:11px;width:46px;height:46px;border-radius:50%;box-sizing:content-box}
+  background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.4);
+  padding:16px;width:24px;height:24px;border-radius:50%;box-sizing:content-box;overflow:visible}
 .cta-contacts span{display:flex;flex-direction:column;line-height:1.35;font-size:1rem}
 .cta-contacts b{font-family:'Lexend Deca',sans-serif;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dorado-soft);font-weight:600}
 
