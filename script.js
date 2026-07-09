@@ -162,25 +162,8 @@
     sectorViews.forEach(function (v) {
       v.classList.toggle('is-active', parseInt(v.getAttribute('data-index'), 10) === i);
     });
-    // Recentrar el mapa real de Manizales en las coordenadas del sector
-    var activeTab = document.querySelector('.sector-tab[data-sector="' + i + '"]');
-    var mapFrame = document.getElementById('sectorMap');
-    if (activeTab && mapFrame) {
-      var lat = parseFloat(activeTab.getAttribute('data-lat'));
-      var lon = parseFloat(activeTab.getAttribute('data-lon'));
-      if (!isNaN(lat) && !isNaN(lon)) {
-        var dLat = 0.010, dLon = 0.014;
-        var bbox = (lon - dLon).toFixed(5) + ',' + (lat - dLat).toFixed(5) + ',' +
-                   (lon + dLon).toFixed(5) + ',' + (lat + dLat).toFixed(5);
-        mapFrame.src = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox +
-                       '&layer=mapnik&marker=' + lat.toFixed(5) + ',' + lon.toFixed(5);
-        var mapOpen = document.getElementById('mapOpen');
-        if (mapOpen) {
-          mapOpen.href = 'https://www.openstreetmap.org/?mlat=' + lat.toFixed(5) +
-                         '&mlon=' + lon.toFixed(5) + '#map=15/' + lat.toFixed(5) + '/' + lon.toFixed(5);
-        }
-      }
-    }
+    // Resaltar en el mapa el marcador del sector seleccionado (dorado)
+    if (typeof highlightSectorMarker === 'function') highlightSectorMarker(i);
   }
   if (sectorTabs.length && sectorViews.length) {
     sectorTabs.forEach(function (t) {
@@ -211,6 +194,56 @@
       });
     }
   }
+
+  // ---- Mapa Leaflet: todas las ubicaciones, el sector activo en dorado ----
+  var _sectorMarkers = [];
+  function sectorMarkerIcon(num, active) {
+    return L.divIcon({
+      className: 'mkr-wrap',
+      html: '<span class="mkr' + (active ? ' mkr-on' : '') + '">' + num + '</span>',
+      iconSize: [30, 30], iconAnchor: [15, 15], tooltipAnchor: [0, -14]
+    });
+  }
+  function highlightSectorMarker(i) {
+    _sectorMarkers.forEach(function (m, idx) {
+      m.setIcon(sectorMarkerIcon(idx + 1, idx === i));
+      m.setZIndexOffset(idx === i ? 1000 : 0);
+    });
+  }
+  (function initSectorMap() {
+    var el = document.getElementById('sectorMap');
+    if (!el) return;
+    if (typeof L === 'undefined') {
+      // Fallback si Leaflet no carga: mapa estático de Manizales
+      el.innerHTML = '<iframe title="Mapa de Manizales" style="width:100%;height:100%;border:0" ' +
+        'loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.5300,5.0200,-75.4400,5.0900&layer=mapnik"></iframe>';
+      return;
+    }
+    if (!sectorTabs.length) return;
+    var pts = [];
+    sectorTabs.forEach(function (t) {
+      var la = parseFloat(t.getAttribute('data-lat')), lo = parseFloat(t.getAttribute('data-lon'));
+      if (!isNaN(la) && !isNaN(lo)) pts.push([la, lo]);
+    });
+    if (!pts.length) return;
+    var map = L.map(el, { scrollWheelZoom: false, zoomControl: true });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+    pts.forEach(function (p, idx) {
+      var m = L.marker(p, { icon: sectorMarkerIcon(idx + 1, idx === 0) }).addTo(map);
+      m.bindTooltip(sectorTabs[idx].textContent, { direction: 'top' });
+      m.on('click', function () {
+        selectSector(idx);
+        var tab = document.querySelector('.sector-tab[data-sector="' + idx + '"]');
+        if (tab) tab.focus();
+      });
+      _sectorMarkers.push(m);
+    });
+    map.fitBounds(pts, { padding: [45, 45] });
+    // Corrige el tamaño tras el layout/animación de reveal
+    setTimeout(function () { map.invalidateSize(); map.fitBounds(pts, { padding: [45, 45] }); }, 450);
+  })();
 
   // ---- Simulador de valorización ----
   var simMonto = document.getElementById('simMonto');
