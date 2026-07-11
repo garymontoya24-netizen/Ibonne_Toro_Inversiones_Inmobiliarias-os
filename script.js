@@ -15,15 +15,48 @@
   var toggle   = document.getElementById('navToggle');
   var waFloat  = document.querySelector('.wa-float');
 
+  // ---- Analítica lista para usar (sin cookies ni llamadas externas) ----
+  // Empuja eventos a window.dataLayer. Si el cliente conecta GA4 / Google Tag
+  // Manager / Meta Pixel, los eventos fluyen solos. Sin herramienta conectada,
+  // es un no-op silencioso (no envía nada, respeta la privacidad).
+  window.dataLayer = window.dataLayer || [];
+  function track(event, params) {
+    try { window.dataLayer.push(Object.assign({ event: event }, params || {})); } catch (e) {}
+  }
+  // Rastreo de todos los CTAs de contacto sin tener que anotar cada enlace.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var isWa = href.indexOf('wa.me') !== -1;
+    var isTel = href.indexOf('tel:') === 0;
+    if (!isWa && !isTel) return;
+    var section = a.closest('section');
+    track('cta_contacto', {
+      canal: isWa ? 'whatsapp' : 'telefono',
+      origen: a.getAttribute('data-cta') || (section ? section.id : 'desconocido')
+    });
+  });
+
   // ---- Año dinámico en el footer ----
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // ---- Header al hacer scroll + botón flotante ----
+  var contacto = document.getElementById('contacto');
   function onScroll() {
     var y = window.scrollY || window.pageYOffset;
     if (header) header.classList.toggle('scrolled', y > 40);
-    if (waFloat) waFloat.classList.toggle('show', y > 600);
+    // El flotante aparece tras 600px, pero se oculta si el usuario ya está en
+    // la sección de contacto (evita que tape el botón "Enviar" del formulario).
+    if (waFloat) {
+      var inContact = false;
+      if (contacto) {
+        var r = contacto.getBoundingClientRect();
+        inContact = r.top < window.innerHeight && r.bottom > 0;
+      }
+      waFloat.classList.toggle('show', y > 600 && !inContact);
+    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -32,8 +65,6 @@
   var main = document.querySelector('main');
   var footer = document.querySelector('.site-footer');
 
-  // Marca el fondo como inerte para que el teclado/lector de pantalla
-  // no salgan del menú abierto. El header NO se inerta (contiene el botón).
   function setBackgroundInert(on) {
     [main, footer, waFloat].forEach(function (el) {
       if (!el) return;
@@ -67,13 +98,11 @@
       else openMenu();
     });
   }
-  // Cerrar menú al navegar
   if (nav) {
     nav.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', closeMenu);
     });
   }
-  // Cerrar con Escape (y devolver el foco al botón)
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && nav && nav.classList.contains('open')) closeMenu();
   });
@@ -84,12 +113,17 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          // pequeño retardo escalonado entre hermanos
           var siblings = Array.prototype.slice.call(entry.target.parentNode.children)
             .filter(function (el) { return el.classList.contains('reveal'); });
           var idx = siblings.indexOf(entry.target);
           entry.target.style.transitionDelay = Math.min(idx, 5) * 80 + 'ms';
           entry.target.classList.add('in');
+          // Limpiar el delay inline una vez terminada la entrada: así no
+          // contamina las transiciones :hover posteriores de la tarjeta.
+          entry.target.addEventListener('transitionend', function clear() {
+            entry.target.style.transitionDelay = '';
+            entry.target.removeEventListener('transitionend', clear);
+          });
           io.unobserve(entry.target);
         }
       });
@@ -99,9 +133,25 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // ---- Scroll-spy: marca en la navegación la sección visible ----
+  var navLinks = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
+  var spySections = navLinks
+    .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+    .filter(Boolean);
+  if (spySections.length && 'IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        navLinks.forEach(function (a) {
+          a.classList.toggle('is-current', a.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    spySections.forEach(function (s) { spy.observe(s); });
+  }
+
   // ---- Contadores animados (banda de datos) ----
-  // Cada <span data-count="10" data-decimals="0" data-prefix="+" data-suffix="%">
-  // se anima de 0 al valor final cuando entra en pantalla.
   var counters = document.querySelectorAll('[data-count]');
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -122,7 +172,7 @@
     function step(ts) {
       if (start === null) start = ts;
       var p = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      var eased = 1 - Math.pow(1 - p, 3);
       el.textContent = prefix + formatCount(target * eased, decimals) + suffix;
       if (p < 1) requestAnimationFrame(step);
       else el.textContent = prefix + formatCount(target, decimals) + suffix;
@@ -144,9 +194,8 @@
     });
   }
 
-  // ---- Explorador de sectores (mapa + pestañas → panel) ----
+  // ---- Explorador de sectores (pestañas → panel + mapa) ----
   var sectorTabs  = document.querySelectorAll('.sector-tab');
-  var sectorPins  = document.querySelectorAll('.map-pin');
   var sectorViews = document.querySelectorAll('.sector-view');
 
   function selectSector(i) {
@@ -155,9 +204,6 @@
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.setAttribute('tabindex', on ? '0' : '-1');
-    });
-    sectorPins.forEach(function (p) {
-      p.classList.toggle('is-active', parseInt(p.getAttribute('data-sector'), 10) === i);
     });
     sectorViews.forEach(function (v) {
       v.classList.toggle('is-active', parseInt(v.getAttribute('data-index'), 10) === i);
@@ -168,15 +214,6 @@
   if (sectorTabs.length && sectorViews.length) {
     sectorTabs.forEach(function (t) {
       t.addEventListener('click', function () { selectSector(parseInt(t.getAttribute('data-sector'), 10)); });
-    });
-    sectorPins.forEach(function (p) {
-      p.addEventListener('click', function () {
-        var i = parseInt(p.getAttribute('data-sector'), 10);
-        selectSector(i);
-        // llevar el foco a la pestaña equivalente para lectores de pantalla
-        var tab = document.querySelector('.sector-tab[data-sector="' + i + '"]');
-        if (tab) tab.focus();
-      });
     });
     // Navegación por flechas entre pestañas (patrón tablist)
     var tabList = document.querySelector('.sector-tabs');
@@ -195,8 +232,10 @@
     }
   }
 
-  // ---- Mapa Leaflet: todas las ubicaciones, el sector activo en dorado ----
+  // ---- Mapa Leaflet: carga diferida (solo cuando el usuario se acerca) ----
   var _sectorMarkers = [];
+  var _mapInit = false;
+
   function sectorMarkerIcon(num, active) {
     return L.divIcon({
       className: 'mkr-wrap',
@@ -210,16 +249,12 @@
       m.setZIndexOffset(idx === i ? 1000 : 0);
     });
   }
-  (function initSectorMap() {
+  function initSectorMap() {
     var el = document.getElementById('sectorMap');
-    if (!el) return;
-    if (typeof L === 'undefined') {
-      // Fallback si Leaflet no carga: mapa estático de Manizales
-      el.innerHTML = '<iframe title="Mapa de Manizales" style="width:100%;height:100%;border:0" ' +
-        'loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.5300,5.0200,-75.4400,5.0900&layer=mapnik"></iframe>';
-      return;
-    }
+    if (!el || _mapInit) return;
+    if (typeof L === 'undefined') return mapFallback(el);
     if (!sectorTabs.length) return;
+    _mapInit = true;
     var pts = [];
     sectorTabs.forEach(function (t) {
       var la = parseFloat(t.getAttribute('data-lat')), lo = parseFloat(t.getAttribute('data-lon'));
@@ -227,6 +262,10 @@
     });
     if (!pts.length) return;
     var map = L.map(el, { scrollWheelZoom: false, zoomControl: true });
+    // En pantallas táctiles desactivamos el arrastre del mapa para que el dedo
+    // haga scroll de la página y no quede "atrapado" paneando el mapa.
+    var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (coarse && map.dragging) map.dragging.disable();
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19, attribution: '&copy; OpenStreetMap'
     }).addTo(map);
@@ -241,8 +280,45 @@
       _sectorMarkers.push(m);
     });
     map.fitBounds(pts, { padding: [45, 45] });
-    // Corrige el tamaño tras el layout/animación de reveal
     setTimeout(function () { map.invalidateSize(); map.fitBounds(pts, { padding: [45, 45] }); }, 450);
+  }
+  function mapFallback(el) {
+    _mapInit = true;
+    el.innerHTML = '<iframe title="Mapa de Manizales" style="width:100%;height:100%;border:0" ' +
+      'loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.5300,5.0200,-75.4400,5.0900&layer=mapnik"></iframe>';
+  }
+
+  // Carga de Leaflet bajo demanda, con Subresource Integrity (SRI).
+  function loadLeaflet(done) {
+    if (window.L) return done();
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+    css.crossOrigin = '';
+    document.head.appendChild(css);
+    var js = document.createElement('script');
+    js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+    js.crossOrigin = '';
+    js.onload = done;
+    js.onerror = function () { mapFallback(document.getElementById('sectorMap')); };
+    document.head.appendChild(js);
+  }
+  (function watchMap() {
+    var host = document.getElementById('sectorMap');
+    if (!host) return;
+    function go() { loadLeaflet(initSectorMap); }
+    if ('IntersectionObserver' in window) {
+      var mio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { go(); mio.disconnect(); }
+        });
+      }, { rootMargin: '400px 0px' });
+      mio.observe(host);
+    } else {
+      go();
+    }
   })();
 
   // ---- Simulador de valorización ----
@@ -281,7 +357,6 @@
 
     [simMonto, simYears, simRate].forEach(setRangeFill);
 
-    // actualizar el enlace de WhatsApp con el escenario del cliente
     var simCta = document.getElementById('simCta');
     if (simCta) {
       var msg = 'Hola Ibonne, usé el simulador: si invierto ' + money(monto)
@@ -307,10 +382,28 @@
       '',
       'Nombre: ' + data.name,
       data.contact ? 'Contacto: ' + data.contact : null,
-      'Interés: ' + data.interest,
+      data.interest ? 'Interés: ' + data.interest : null,
       data.message ? 'Mensaje: ' + data.message : null
     ].filter(Boolean);
     return lines.join('\n');
+  }
+
+  // Guarda el lead en el propio dispositivo como red de seguridad: si el salto
+  // a WhatsApp falla o el usuario no lo completa, sus datos no se pierden del
+  // todo y pueden recuperarse. (Un CRM/endpoint real sería el paso siguiente.)
+  function persistLead(data) {
+    try {
+      var key = 'it_leads';
+      var arr = JSON.parse(localStorage.getItem(key) || '[]');
+      arr.push({ ts: new Date().toISOString(), name: data.name, contact: data.contact, interest: data.interest, message: data.message });
+      localStorage.setItem(key, JSON.stringify(arr.slice(-50)));
+    } catch (e) {}
+  }
+
+  function fieldError(field, msg) {
+    note.textContent = msg;
+    note.className = 'form-note err';
+    if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); }
   }
 
   if (form) {
@@ -323,26 +416,34 @@
         message: form.message.value.trim()
       };
 
-      if (!data.name) {
-        note.textContent = 'Por favor escribe tu nombre.';
+      form.name.removeAttribute('aria-invalid');
+      form.contact.removeAttribute('aria-invalid');
+
+      if (!data.name) return fieldError(form.name, 'Por favor escribe tu nombre.');
+      if (!data.contact) return fieldError(form.contact, 'Déjame un WhatsApp o correo para poder responderte.');
+      if (form.consent && !form.consent.checked) {
+        note.textContent = 'Necesito tu autorización para tratar tus datos y poder contactarte.';
         note.className = 'form-note err';
-        form.name.setAttribute('aria-invalid', 'true');
-        form.name.focus();
+        form.consent.focus();
         return;
       }
+
+      persistLead(data);
+      track('lead_formulario', { interes: data.interest || 'no_indicado' });
 
       var text = encodeURIComponent(buildMessage(data));
       var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
 
-      form.name.removeAttribute('aria-invalid');
-      note.textContent = 'Abriendo WhatsApp con tu mensaje…';
+      note.textContent = 'Abriendo WhatsApp con tu mensaje… Si no se abre, escríbenos al +57 310 497 33 36.';
       note.className = 'form-note ok';
 
       var win = window.open(url, '_blank');
-      // Si el navegador bloquea el popup, redirigimos en la misma pestaña.
       if (!win) window.location.href = url;
-
-      form.reset();
+      // No reseteamos de inmediato: si el salto falla, el usuario conserva lo
+      // que escribió. Limpiamos tras unos segundos, ya asegurado el envío.
+      setTimeout(function () { form.reset(); calcConsentReset(); }, 4000);
     });
   }
+  // Al resetear, el checkbox required vuelve a vacío; nada más que hacer.
+  function calcConsentReset() {}
 })();

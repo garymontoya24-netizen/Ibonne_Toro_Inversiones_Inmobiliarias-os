@@ -1,0 +1,19 @@
+# Configuración de GitHub Pages (Jekyll).
+# El sitio en vivo son index.html, styles.css, script.js, privacidad.html e images/.
+# Estos archivos y carpetas son de trabajo interno y NO deben publicarse ni ser
+# accesibles por URL. Jekyll los excluye del sitio generado.
+exclude:
+  - AUDITORIA_MAESTRA.md
+  - INFORME_CIERRE.md
+  - CONTEXTO_AUDITORIA.md
+  - LANDING_CAMBIOS.md
+  - REPORTE_AUDITOR.md
+  - REPORTE_CAMBIOS.md
+  - REPORTE_DIAGNOSTICO.md
+  - README.md
+  - build/
+  - carruseles/
+  - fotos_fuente/
+  - material_apoyo/
+  - LANDING_PAGE_IBONNE_TORO/
+  - .gitignore
