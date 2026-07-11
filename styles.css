@@ -270,13 +270,13 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
    IBONNE
    ============================================================ */
 .ibonne-section{padding:104px 0;background:#fff}
-.ibonne-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
+.ibonne-grid{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:56px;align-items:center}
 .ibonne-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
 .ibonne-photo::before{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  border:1px solid rgba(255,255,255,.25);border-radius:var(--radius-lg);
+  border:1px solid rgba(212,175,55,.28);border-radius:var(--radius-lg);
 }
-.ibonne-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 22%}
+.ibonne-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 22%;display:block}
 .ibonne-badge{
   position:absolute;left:18px;bottom:18px;z-index:3;
   font-family:'Poppins',sans-serif;font-size:.78rem;letter-spacing:.06em;color:#fff;
@@ -290,13 +290,14 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 }
 .ibonne-text p:not(.eyebrow):not(.ibonne-role){color:var(--ink-soft);margin-bottom:16px;max-width:560px}
 .ibonne-text p strong{color:var(--azul)}
-.ibonne-facts{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 8px}
-.ibonne-facts li{
-  background:var(--gris);border-radius:var(--radius);padding:16px 20px;flex:1 1 140px;
-  border-bottom:3px solid var(--dorado);
-}
-.ibonne-facts strong{display:block;font-family:'Poppins',sans-serif;color:var(--azul);font-size:1.05rem;font-weight:700;line-height:1.2}
-.ibonne-facts span{font-size:.82rem;color:var(--ink-soft)}
+/* Datos como grilla con íconos dorados (sin cajas) */
+.ibonne-facts{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px;margin:28px 0 34px;padding:0}
+.ibonne-facts li{display:flex;align-items:flex-start;gap:12px}
+.ibonne-facts .fact-ico{flex-shrink:0;width:22px;height:22px;margin-top:1px}
+.ibonne-facts .fact-ico svg{width:22px;height:22px;fill:none;stroke:var(--dorado-deep);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ibonne-facts .fact-value{display:block;font-family:'Poppins',sans-serif;color:var(--azul);font-size:1.02rem;font-weight:700;line-height:1.2}
+.ibonne-facts .fact-label{display:block;font-size:.82rem;color:var(--ink-soft);margin-top:3px}
+@media(max-width:620px){.ibonne-facts{grid-template-columns:1fr;gap:18px}}
 
 /* ============================================================
    PORTAFOLIO / GALERÍA
