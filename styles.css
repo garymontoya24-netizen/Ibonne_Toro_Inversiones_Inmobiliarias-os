@@ -270,13 +270,14 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
    IBONNE
    ============================================================ */
 .ibonne-section{padding:104px 0;background:#fff}
-.ibonne-grid{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:56px;align-items:center}
+.ibonne-grid{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:56px;align-items:stretch}
 .ibonne-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
 .ibonne-photo::before{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   border:1px solid rgba(212,175,55,.28);border-radius:var(--radius-lg);
 }
-.ibonne-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 22%;display:block}
+/* La foto se estira a la altura del bloque de texto (mismo alto que la info) */
+.ibonne-photo img{width:100%;height:100%;min-height:100%;object-fit:cover;object-position:center 22%;display:block}
 .ibonne-badge{
   position:absolute;left:18px;bottom:18px;z-index:3;
   font-family:'Poppins',sans-serif;font-size:.78rem;letter-spacing:.06em;color:#fff;
@@ -429,6 +430,7 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 @media(max-width:860px){
   .value-grid,.ibonne-grid,.cta-grid{grid-template-columns:1fr;gap:40px}
   .ibonne-photo{max-width:440px;margin:0 auto}
+  .ibonne-photo img{height:auto;min-height:0;aspect-ratio:4/5}
   .hero-overlay{background:linear-gradient(180deg,rgba(44,62,80,.62),rgba(44,62,80,.78))}
   /* En móvil el hero alinea arriba: el contenido nunca choca con el header.
      Nota: el div es "container hero-content"; en ≤620px la regla .container{padding:0 20px}
