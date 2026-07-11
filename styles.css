@@ -271,18 +271,24 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
    ============================================================ */
 .ibonne-section{padding:104px 0;background:#fff}
 .ibonne-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
-.ibonne-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
-.ibonne-photo::before{
+/* Foto: retrato limpio con esquinas redondeadas, sombra suave y fina línea dorada interior */
+.ibonne-photo{position:relative;border-radius:var(--radius-lg)}
+.ibonne-photo-inner{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);
+}
+.ibonne-photo-inner::after{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  border:1px solid rgba(255,255,255,.25);border-radius:var(--radius-lg);
+  border:1px solid rgba(212,175,55,.30);border-radius:var(--radius-lg);
 }
-.ibonne-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 22%}
+.ibonne-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 24%;display:block;transition:transform .8s var(--ease)}
+.ibonne-photo:hover img{transform:scale(1.03)}
 .ibonne-badge{
-  position:absolute;left:18px;bottom:18px;z-index:3;
-  font-family:'Poppins',sans-serif;font-size:.78rem;letter-spacing:.06em;color:#fff;
-  background:rgba(44,62,80,.78);backdrop-filter:blur(6px);padding:9px 16px;border-radius:999px;
-  border:1px solid rgba(212,175,55,.5);
+  position:absolute;left:16px;bottom:16px;z-index:3;display:inline-flex;align-items:center;gap:8px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:.76rem;letter-spacing:.05em;color:#fff;
+  background:rgba(44,62,80,.82);backdrop-filter:blur(6px);padding:9px 16px;border-radius:999px;
+  border:1px solid rgba(212,175,55,.55);
 }
+.ibonne-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--dorado);flex-shrink:0}
 .ibonne-text .section-title{margin-bottom:4px}
 .ibonne-role{
   font-family:'Poppins',sans-serif;color:var(--dorado-ink);font-weight:600;
@@ -290,13 +296,24 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 }
 .ibonne-text p:not(.eyebrow):not(.ibonne-role){color:var(--ink-soft);margin-bottom:16px;max-width:560px}
 .ibonne-text p strong{color:var(--azul)}
-.ibonne-facts{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 8px}
+/* Credenciales como lista refinada con hairlines y acento dorado (sin cajas) */
+.ibonne-facts{list-style:none;margin:28px 0 32px;padding:0;border-top:1px solid var(--line)}
 .ibonne-facts li{
-  background:var(--gris);border-radius:var(--radius);padding:16px 20px;flex:1 1 140px;
-  border-bottom:3px solid var(--dorado);
+  display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:14px 2px;border-bottom:1px solid var(--line);
 }
-.ibonne-facts strong{display:block;font-family:'Poppins',sans-serif;color:var(--azul);font-size:1.05rem;font-weight:700;line-height:1.2}
-.ibonne-facts span{font-size:.82rem;color:var(--ink-soft)}
+.ibonne-facts .fact-value{
+  display:inline-flex;align-items:center;gap:11px;flex-shrink:0;
+  font-family:'Poppins',sans-serif;font-weight:700;color:var(--azul);font-size:1.04rem;line-height:1.2;
+}
+.ibonne-facts .fact-value::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--dorado);flex-shrink:0;
+}
+.ibonne-facts .fact-label{color:var(--ink-soft);font-size:.9rem;text-align:right}
+@media(max-width:620px){
+  .ibonne-facts li{flex-direction:column;align-items:flex-start;gap:3px;padding:13px 2px}
+  .ibonne-facts .fact-label{text-align:left}
+}
 
 /* ============================================================
    PORTAFOLIO / GALERÍA
