@@ -9,6 +9,12 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Ibonne Toro">
 <link rel="canonical" href="https://ibonnetoroinversionesinmobiliarias.com/">
+
+<!-- Seguridad: el navegador solo acepta código propio, Leaflet (unpkg, con verificación SRI),
+     Google Fonts y los mapas de OpenStreetMap. Todo lo demás queda bloqueado.
+     Si algún día se conecta Google Analytics, hay que añadir sus dominios aquí. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: https://*.tile.openstreetmap.org https://unpkg.com; font-src https://fonts.gstatic.com; connect-src 'self'; frame-src https://www.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <script>document.documentElement.classList.add('js');</script>
 
 <!-- Open Graph -->
@@ -693,6 +699,6 @@
 </a>
 
 <!-- Leaflet se carga de forma diferida desde script.js (con SRI) solo cuando el mapa entra en viewport -->
-<script src="script.js?v=7" defer></script>
+<script src="script.js?v=8" defer></script>
 </body>
 </html>

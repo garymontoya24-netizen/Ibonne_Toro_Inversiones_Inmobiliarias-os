@@ -4,6 +4,14 @@
 (function () {
   'use strict';
 
+  // ---- Anti-clickjacking ----
+  // GitHub Pages no permite cabeceras HTTP, así que si otra página intenta
+  // meter este sitio dentro de un iframe (para superponer botones falsos),
+  // rompemos el marco y tomamos la ventana completa.
+  if (window.top !== window.self) {
+    try { window.top.location = window.location; } catch (e) { /* cross-origin: el intento queda bloqueado */ }
+  }
+
   // ---- CONFIGURACIÓN DE CONTACTO ----
   // Número de WhatsApp verificado de IBONNE TORO (formato internacional, sin "+").
   var WHATSAPP_NUMBER = '573104973336'; // +57 310 497 33 36

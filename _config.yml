@@ -2,9 +2,14 @@
 # El sitio en vivo son index.html, styles.css, script.js, privacidad.html e images/.
 # Estos archivos y carpetas son de trabajo interno y NO deben publicarse ni ser
 # accesibles por URL. Jekyll los excluye del sitio generado.
+# Necesario para servir /.well-known/security.txt (Jekyll ignora las carpetas con punto)
+include:
+  - .well-known
+
 exclude:
   - AUDITORIA_MAESTRA.md
   - INFORME_CIERRE.md
+  - GUIA_SEGURIDAD_Y_INSTAGRAM.md
   - CONTEXTO_AUDITORIA.md
   - LANDING_CAMBIOS.md
   - REPORTE_AUDITOR.md
