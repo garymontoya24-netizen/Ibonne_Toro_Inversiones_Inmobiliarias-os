@@ -302,7 +302,7 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 /* ============================================================
    PORTAFOLIO / GALERÍA
    ============================================================ */
-.gallery-section{padding:104px 0 0;background:var(--gris)}
+.gallery-section{padding:104px 0 0;background:#fff}
 .gallery{
   display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px;margin-top:8px;
 }
@@ -593,7 +593,7 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.12;color:var(--ink);l
 /* ============================================================
    NUESTROS INMUEBLES (portales)
    ============================================================ */
-.portals-section{padding:104px 0;background:#fff}
+.portals-section{padding:104px 0;background:var(--gris)}
 .portals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
 .portal-card{
   display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--line);

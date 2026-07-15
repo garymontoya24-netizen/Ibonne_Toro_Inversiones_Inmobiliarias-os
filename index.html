@@ -86,11 +86,11 @@
     </a>
     <nav class="nav" id="nav" aria-label="Navegación principal">
       <a href="#manizales">Por qué Manizales</a>
-      <a href="#sectores">Sectores</a>
       <a href="#simulador">Simulador</a>
-      <a href="#proceso">Proceso</a>
+      <a href="#sectores">Sectores</a>
       <a href="#ibonne">Ibonne</a>
       <a href="#inmuebles">Inmuebles</a>
+      <a href="#proceso">Proceso</a>
       <a href="#contacto" class="nav-cta">Hablemos</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
@@ -154,8 +154,41 @@
       </article>
     </div>
     <div class="mini-cta reveal">
-      <p>Esos son los números de la ciudad. Cuéntame los tuyos y miramos qué te sirve.</p>
-      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20ya%20vi%20los%20datos%20de%20Manizales%20y%20quiero%20hablar." class="btn btn-gold" target="_blank" rel="noopener">Miremos tu caso</a>
+      <p>Esos son los números de la ciudad. Abajo pon los tuyos y mira cómo crecerían.</p>
+      <a href="#simulador" class="btn btn-gold">Probar el simulador</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIMULADOR DE VALORIZACIÓN ============ -->
+<section class="sim-section" id="simulador">
+  <div class="container sim-grid">
+    <div class="sim-intro reveal">
+      <p class="eyebrow">Simulador de valorización</p>
+      <h2 class="section-title">Haz cuentas con la valorización de Manizales</h2>
+      <p>Pon cuánto invertirías y por cuántos años, y mira una proyección con la valorización real de la ciudad. Es para hacerte una idea, nada más.</p>
+      <p class="sim-aviso">Es un estimado, no una promesa: la valorización pasada no garantiza la futura, y cada inmueble se comporta distinto.</p>
+    </div>
+    <div class="sim-card reveal">
+      <div class="sim-row">
+        <label for="simMonto">Cuánto invertirías <output id="simMontoOut" for="simMonto">$300.000.000</output></label>
+        <input type="range" class="sim-range" id="simMonto" min="150000000" max="2000000000" step="10000000" value="300000000" aria-label="Monto de inversión en pesos">
+      </div>
+      <div class="sim-row">
+        <label for="simYears">Por cuántos años <output id="simYearsOut" for="simYears">5 años</output></label>
+        <input type="range" class="sim-range" id="simYears" min="1" max="15" step="1" value="5" aria-label="Años">
+      </div>
+      <div class="sim-row">
+        <label for="simRate">Valorización anual <output id="simRateOut" for="simRate">10% / año</output></label>
+        <input type="range" class="sim-range" id="simRate" min="4" max="14" step="0.5" value="10" aria-label="Valorización anual estimada en porcentaje">
+      </div>
+      <div class="sim-result" aria-live="polite" aria-atomic="true">
+        <span class="sim-result-label">En <span id="simYearsBadge">5 años</span>, tu inversión sería</span>
+        <div class="sim-result-main" id="simValor">$483.153.000</div>
+        <p class="sim-result-sub">Eso es <b id="simGain">+$183.153.000</b> más de lo que pusiste.</p>
+      </div>
+      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20us%C3%A9%20el%20simulador%20y%20quiero%20ver%20n%C3%BAmeros%20reales." class="btn btn-gold btn-block" id="simCta" target="_blank" rel="noopener">Veámoslo con números reales</a>
+      <p class="sim-note">Base: +10% anual (valorización de vivienda usada 2025, Banco de la República). Ajústala a tu criterio.</p>
     </div>
   </div>
 </section>
@@ -166,7 +199,7 @@
     <div class="value-text reveal">
       <p class="eyebrow">Por qué con <span class="brand-name">IBONNE TORO</span></p>
       <h2 class="section-title">Ver apartamentos es fácil; saber cuál comprar es otra historia.</h2>
-      <p>Un portal te muestra todo y te deja ahí, decidiendo solo. ¿Cuál está en su precio? ¿Cuál está sobrevalorado? ¿Cuál se va a valorizar? Eso no lo resuelve un buscador.</p>
+      <p>Esa proyección solo se cumple si compras el inmueble correcto. Y ahí está el detalle: un portal te muestra todo y te deja ahí, decidiendo solo. ¿Cuál está en su precio? ¿Cuál está sobrevalorado? ¿Cuál se va a valorizar? Eso no lo resuelve un buscador.</p>
       <p>Ese es mi trabajo: comparo precios de verdad, miro qué se está valorizando y te digo cuál de todos esos anuncios sí vale la pena. Te acompaño hasta la firma.</p>
       <p>¿Vas a <strong>vender</strong>? También te acompaño: pongo tu inmueble en su precio y cierro con los papeles en regla.</p>
     </div>
@@ -214,7 +247,7 @@
     <div class="section-head center reveal">
       <p class="eyebrow">Sectores</p>
       <h2 class="section-title">Los sectores que manejo en Manizales.</h2>
-      <p class="section-lead">Van del más exclusivo al de mejor renta. Toca cada uno para ver por qué me gusta y dónde queda.</p>
+      <p class="section-lead">Como te decía, me los he caminado uno por uno. Van del más exclusivo al de mejor renta; toca cada uno para ver por qué me gusta y dónde queda.</p>
     </div>
 
     <div class="sector-explorer reveal">
@@ -341,78 +374,7 @@
         </div>
       </div>
     </div>
-    <p class="sectors-note reveal">¿Te interesa otra zona? Escríbeme y te digo qué pienso.</p>
-  </div>
-</section>
-
-<!-- ============ SIMULADOR DE VALORIZACIÓN ============ -->
-<section class="sim-section" id="simulador">
-  <div class="container sim-grid">
-    <div class="sim-intro reveal">
-      <p class="eyebrow">Simulador de valorización</p>
-      <h2 class="section-title">Haz cuentas con la valorización de Manizales</h2>
-      <p>Pon cuánto invertirías y por cuántos años, y mira una proyección con la valorización real de la ciudad. Es para hacerte una idea, nada más.</p>
-      <p class="sim-aviso">Es un estimado, no una promesa: la valorización pasada no garantiza la futura, y cada inmueble se comporta distinto.</p>
-    </div>
-    <div class="sim-card reveal">
-      <div class="sim-row">
-        <label for="simMonto">Cuánto invertirías <output id="simMontoOut" for="simMonto">$300.000.000</output></label>
-        <input type="range" class="sim-range" id="simMonto" min="150000000" max="2000000000" step="10000000" value="300000000" aria-label="Monto de inversión en pesos">
-      </div>
-      <div class="sim-row">
-        <label for="simYears">Por cuántos años <output id="simYearsOut" for="simYears">5 años</output></label>
-        <input type="range" class="sim-range" id="simYears" min="1" max="15" step="1" value="5" aria-label="Años">
-      </div>
-      <div class="sim-row">
-        <label for="simRate">Valorización anual <output id="simRateOut" for="simRate">10% / año</output></label>
-        <input type="range" class="sim-range" id="simRate" min="4" max="14" step="0.5" value="10" aria-label="Valorización anual estimada en porcentaje">
-      </div>
-      <div class="sim-result" aria-live="polite" aria-atomic="true">
-        <span class="sim-result-label">En <span id="simYearsBadge">5 años</span>, tu inversión sería</span>
-        <div class="sim-result-main" id="simValor">$483.153.000</div>
-        <p class="sim-result-sub">Eso es <b id="simGain">+$183.153.000</b> más de lo que pusiste.</p>
-      </div>
-      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20us%C3%A9%20el%20simulador%20y%20quiero%20ver%20n%C3%BAmeros%20reales." class="btn btn-gold btn-block" id="simCta" target="_blank" rel="noopener">Veámoslo con números reales</a>
-      <p class="sim-note">Base: +10% anual (valorización de vivienda usada 2025, Banco de la República). Ajústala a tu criterio.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CÓMO FUNCIONA ============ -->
-<section class="process-section" id="proceso">
-  <div class="container">
-    <div class="section-head center reveal">
-      <p class="eyebrow eyebrow-gold">Cómo funciona</p>
-      <h2 class="section-title light">De la primera charla a las llaves.</h2>
-      <p class="section-lead light">Antes de comprar, nos sentamos a entender qué necesitas.</p>
-    </div>
-    <ol class="steps">
-      <li class="step reveal">
-        <span class="step-num">01</span>
-        <h3>Conversamos</h3>
-        <p>Me cuentas qué buscas y para qué. Sin costo y sin compromiso.</p>
-      </li>
-      <li class="step reveal">
-        <span class="step-num">02</span>
-        <h3>Analizo opciones</h3>
-        <p>Reviso el mercado y te llevo solo lo que encaja con lo que buscas y con lo que tienes para invertir.</p>
-      </li>
-      <li class="step reveal">
-        <span class="step-num">03</span>
-        <h3>Visitamos</h3>
-        <p>Vamos juntos a ver lo que vale la pena, y te muestro los datos de valorización de cada zona.</p>
-      </li>
-      <li class="step reveal">
-        <span class="step-num">04</span>
-        <h3>Cierras con respaldo</h3>
-        <p>Te acompaño en la negociación y el papeleo, hasta la firma.</p>
-      </li>
-    </ol>
-    <div class="mini-cta reveal">
-      <p>Todo empieza por una charla.</p>
-      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20quiero%20empezar%20con%20una%20conversaci%C3%B3n%20sin%20costo%20y%20sin%20compromiso." class="btn btn-gold" target="_blank" rel="noopener">Escríbeme y arrancamos</a>
-      <span class="cta-reason">La primera charla va por mi cuenta</span>
-    </div>
+    <p class="sectors-note reveal">¿Te interesa otra zona? Escríbeme y te digo qué pienso. Y detrás de cada uno de estos sectores hay alguien que los ha recorrido en persona: te la presento.</p>
   </div>
 </section>
 
@@ -493,7 +455,7 @@
         </div>
       </a>
     </div>
-    <p class="portals-note reveal">Lo mejor muchas veces no se publica. Escríbeme y te cuento qué hay disponible.</p>
+    <p class="portals-note reveal">Y lo mejor muchas veces no se publica: aquí abajo te dejo una muestra de lo que manejo, y si quieres verlo todo, escríbeme.</p>
   </div>
 </section>
 
@@ -516,8 +478,46 @@
   </div>
   <div class="container">
     <div class="mini-cta reveal">
-      <p>¿Viste algo que te gustó? Dime qué buscas y te consigo algo parecido.</p>
-      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20vi%20tu%20portafolio%20y%20quiero%20saber%20qu%C3%A9%20hay%20disponible." class="btn btn-gold" target="_blank" rel="noopener">Muéstrame opciones como estas</a>
+      <p>¿Te imaginas uno de estos tuyo? Mira lo simple que es dar el primer paso.</p>
+      <a href="#proceso" class="btn btn-gold">Ver cómo empezamos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section class="process-section" id="proceso">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow eyebrow-gold">Cómo funciona</p>
+      <h2 class="section-title light">De la primera charla a las llaves.</h2>
+      <p class="section-lead light">Antes de comprar, nos sentamos a entender qué necesitas.</p>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step-num">01</span>
+        <h3>Conversamos</h3>
+        <p>Me cuentas qué buscas y para qué. Sin costo y sin compromiso.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">02</span>
+        <h3>Analizo opciones</h3>
+        <p>Reviso el mercado y te llevo solo lo que encaja con lo que buscas y con lo que tienes para invertir.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">03</span>
+        <h3>Visitamos</h3>
+        <p>Vamos juntos a ver lo que vale la pena, y te muestro los datos de valorización de cada zona.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">04</span>
+        <h3>Cierras con respaldo</h3>
+        <p>Te acompaño en la negociación y el papeleo, hasta la firma.</p>
+      </li>
+    </ol>
+    <div class="mini-cta reveal">
+      <p>Todo empieza por una charla. ¿Te quedan dudas antes de escribirme? Abajo respondo las de siempre.</p>
+      <a href="https://wa.me/573104973336?text=Hola%20Ibonne%2C%20quiero%20empezar%20con%20una%20conversaci%C3%B3n%20sin%20costo%20y%20sin%20compromiso." class="btn btn-gold" target="_blank" rel="noopener">Escríbeme y arrancamos</a>
+      <span class="cta-reason">La primera charla va por mi cuenta</span>
     </div>
   </div>
 </section>
@@ -667,12 +667,12 @@
     <div class="footer-col">
       <h4>Navegación</h4>
       <a href="#manizales">Por qué Manizales</a>
-      <a href="#sectores">Sectores</a>
       <a href="#simulador">Simulador</a>
-      <a href="#proceso">Proceso</a>
+      <a href="#sectores">Sectores</a>
       <a href="#ibonne">Ibonne</a>
       <a href="#inmuebles">Inmuebles</a>
       <a href="#portafolio">Portafolio</a>
+      <a href="#proceso">Proceso</a>
       <a href="#faq">Preguntas frecuentes</a>
     </div>
     <div class="footer-col">
